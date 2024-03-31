@@ -1,0 +1,16 @@
+import tkinter as tk
+raiz = tk.Tk()
+def saluda():
+    print("hola")
+tk.Entry(raiz).pack(padx = 20, pady = 20)
+tk.Checkbutton(raiz, text = "marca si estas de acuerdo").pack(padx = 30, pady = 30)
+tk.Label(raiz, text = "Soy rulope").pack(padx = 50, pady = 50)
+lienzo = tk.Canvas(raiz)
+lienzo.create_oval(20,20,50,50, outline = "red", width = 2)
+lienzo.pack(padx = 200, pady = 200)
+scale = tk.Scale(raiz,from_ = 0,to = 100,orient = tk.HORIZONTAL)
+scale.pack(padx = 120, pady = 120)
+tk.message(raiz, text = "hola buenas tardes es un texto multilinea").pack(padx = 170, pady = 170)
+tk.Radiobutton(raiz, text = "marca si estas de acuerdo").pack(padx = 70, pady = 70)
+tk.Button(raiz, text = "pulsa y te saludo",command=saluda).pack(padx = 100, pady = 100)
+raiz.mainloop()
