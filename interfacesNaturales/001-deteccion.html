@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*html,body{background-color: black;}*/
+        video{display: none;}
+        canvas{position: absolute; top: 0px; left: 0px;}
+        #lienzo2{opacity: 0.5;}
+        #info{margin-top: 500px;}
+        #slider{margin-top: 20px;}
+    </style>
+</head>
+<body>
+    <canvas id = "lienzo" width="640px" height="480px"></canvas>
+    <canvas id = "lienzo2" width="640px" height="480px"></canvas>
+    <video src="" id = "video" autoplay></video>
+    <div id="info">Movimiento detectado: <span id="movimiento">0</span></div>
+    <div id="slider">
+        <p>Selecciona el filtro del movimiento</p>
+        <input type="range" min="1" max="100" value="20" class="slider" id="umbralSlider">
+    </div>
+
+    <script>
+        //declaro las variables inicales
+        const video = document.getElementById("video");
+        const lienzo = document.getElementById("lienzo");
+        const contexto = lienzo.getContext("2d");
+        const contexto2 = lienzo2.getContext("2d");
+        const infoMovimiento = document.getElementById("movimiento");
+        const slider = document.getElementById("umbralSlider")
+        var cuadrosx = []
+        var cuadrosy = []
+        contexto2.fillStyle = "rgba(255,255,255,0.01)";
+        //el paso es cada cuento pixeles hago la comprobacion
+        const paso = 32;
+        //creo un contenedor para el fotograma anterior
+        var valoresViejos = [];
+        //creo un contenedor para el nuevo fotograma
+        var valoresNuevos = [];
+        var contador = 0;
+        navigator.mediaDevices.getUserMedia({video:true})
+            .then(function(flujo){
+                video.srcObject = flujo;
+        })
+        .catch(function(error){
+            console.log("error " + error);
+        })
+
+       /* function fillCanvas(color) {
+            contexto2.fillStyle = color;
+            contexto2.fillRect(0, 0, lienzo2.width, lienzo2.height);
+        }*/
+
+        function generarColorAleatorio() {
+            const componenteRojo = Math.floor(Math.random() * 256);
+            const componenteVerde = Math.floor(Math.random() * 256);
+            const componenteAzul = Math.floor(Math.random() * 256);
+
+            const colorAleatorio = `rgb(${componenteRojo}, ${componenteVerde}, ${componenteAzul})`;
+
+            return colorAleatorio;
+            }
+
+        function calcularPromedio(valoresNuevos,valoresViejos){
+            let rojoNuevo = valoresNuevos[0];
+            let rojoViejo = valoresViejos[0];
+            let verdeNuevo = valoresNuevos[1];
+            let verdeViejo = valoresViejos[1];
+            let azulNuevo = valoresNuevos[2];
+            let azulViejo = valoresViejos[2];
+            let diferenciaRojo = Math.abs(rojoNuevo - rojoViejo);
+            let diferenciaVerde = Math.abs(verdeNuevo - verdeViejo);
+            let diferenciaAzul = Math.abs(azulNuevo - azulViejo);
+            return (diferenciaRojo + diferenciaVerde + diferenciaAzul)/3
+        }
+
+        function videoALienzo(){
+
+            //fillCanvas("lightblue")
+            contexto2.fillRect(0,0,640,480)
+            //en el canvas pego el video
+            contexto.drawImage(video,0,0,lienzo.width,lienzo.height)
+            //a los pixeles viejos le doy el valor de los últimos fotogramas
+            valoresViejos = valoresNuevos;
+            //reinicio la informacion de los pixeles nuevos que voy a añadir ahora
+            valoresNuevos = [];
+            //repaso la imagen en X y en Y
+            for(let x = 0; x<640; x += paso){
+                for(let y = 0; y<480; y += paso){
+                    //Tomo el valor del pixel
+                    let pixel = contexto.getImageData(x,y,1,1)
+                    let datos = []
+                    datos.push(pixel.data)
+                    datos.push(x)
+                    datos.push(y)
+                    //Vuelvo a guardar el valor de los pixeles nuevos en su array correspondiente
+                    valoresNuevos.push({
+                        data:pixel.data,
+                        x:x,
+                        y:y
+                    })
+                }
+
+            }
+
+            if(contador>0){
+                for(let i = 0; i<valoresNuevos.length; i++){
+                    let promedio = calcularPromedio(valoresNuevos[i].data,valoresViejos[i].data)
+                    //si la diferencia es grande hay movimiento
+                    var sliderValor = slider.value;
+                    if (promedio > sliderValor) {
+                        contexto2.strokeStyle = generarColorAleatorio(); 
+                        contexto2.strokeRect(valoresNuevos[i].x, valoresViejos[i].y, paso, paso);
+                        if (typeof (cuadrosx[valoresNuevos[i].x]) == 'undefined') {
+                            cuadrosx[valoresNuevos[i].x] = 1;
+                        } else {
+                            cuadrosx[valoresNuevos[i].x]++;
+                        }
+                        if (typeof (cuadrosy[valoresNuevos[i].y]) == 'undefined') {
+                            cuadrosy[valoresNuevos[i].y] = 1;
+                        } else {
+                            cuadrosy[valoresNuevos[i].y]++;
+                        }
+                    }
+
+                }
+            }
+
+            const totalMovimiento = Object.values(cuadrosx).reduce((total, count) => total + count, 0) +
+            Object.values(cuadrosy).reduce((total, count) => total + count, 0);
+            infoMovimiento.textContent = totalMovimiento;
+            contador++;
+            requestAnimationFrame(videoALienzo)
+        }
+
+        video.addEventListener('play',() => {
+            videoALienzo()
+        })
+    </script>
+</body>
+</html>
