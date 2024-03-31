@@ -1,0 +1,53 @@
+extends layout.pug 
+
+block content 
+
+    body.html_pelis
+
+        h1 Lista de películas
+
+        div.div 
+
+            -if(datos.length)
+                table.table 
+                    tbody
+
+                        tr 
+
+                            th ID de la película
+                            th Título
+                            th Imagen
+                            th Valoración
+                            th(colspan="2")
+                                form(method="GET" action="/pelis/agregar")
+                                    input.button.add(type="submit",value="agregar películas")
+
+                        
+                        each movie in datos
+
+                            tr 
+
+                                td 
+                                    h2 #{movie.id}
+                                td
+                                    h2 #{movie.título}
+                                td
+                                    img.poster(src=movie.imagen, alt=movie.titulo)
+                                td
+                                    h2 #{movie.valoracion}
+                                td  
+                                    form(method="GET" action=`/pelis/editar/${movie.id}`)
+                                        button.button.edit(type="submit") Editar
+
+
+                                td 
+                                    form(method="POST" action=`/pelis/eliminar/${movie.id}`)
+                                        input.button.delete(type="button",value="eliminar" onclick="eliminar(this)" )           
+                        script.
+                            function eliminar(input){
+                                var borrar=confirm("¿Estas seguro de que quieres eliminar la película?")
+                                return (borrar) ? input.parentNode.submit() : false
+                            }
+
+            -else
+                p.error No existen películas en la base de datos

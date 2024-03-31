@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+  body.html_loggin
+    div.css_bonito_cambiar_contrasena
+      h1 #{mensaje}
+      form(action="/cambia_contrasena", method="post")
+        label(for="") Introduce la nueva contraseña
+        br
+        input(type="password", name="nuevaContraseña", id="nuevaContraseña")
+        br
+        input(type="hidden", name="usu", value=usu)
+        br
+        input(type="submit", value="cambiar la contraseña")

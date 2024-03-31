@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+  body.html_pelis
+    h1.h1 #{mensaje}
+
+    div.css_bonito_editar
+      form(action="/actualizar/" + data.id, method="post")
+        label(for="titulo") Aquí puedes editar el título de la película
+        br
+        input(type="text", name="titulo", id="titulo", value=data[0].título, required)
+
+        br
+        br
+
+        label(for="poster") Aquí puedes editar el poster de la película
+        br
+        input(type="text", name="poster", id="poster", value=data[0].imagen, required)
+
+        br
+        br
+
+        label(for="valoracion") Aquí puedes editar la valoración de la película
+        br
+        input(type="number", name="valoracion", id="valoracion", value=data[0].valoracion, required)
+
+        br
+        br
+
+        input(type="submit", name="editar", id="editar", value="Editar la película")
+
+

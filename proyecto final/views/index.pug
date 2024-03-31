@@ -1,0 +1,22 @@
+extends layout.pug 
+
+block content 
+
+  body.html_loggin
+    div.css_bonito_loggin
+      h1 #{iniciarSesion}
+      form(action="/" method="POST")
+        label(for="usu") Usuario:
+        br
+        input(type="text", name="usu", id="usu")
+        br
+        label(for="contra") Contraseña:
+        br
+        input(type="password", name="contra", id="contra")
+        br
+        br
+        input(type="submit", value="Loggin")
+        br
+        a(href="/registrar") Si quieres registrarte, pulsa aquí
+        br
+        a(href="/contrasena") ¿Se te olvidó la contraseña?

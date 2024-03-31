@@ -1,0 +1,18 @@
+extends layout.pug 
+block content
+  body.html_loggin
+    div.css_bonito_registro
+      h1 #{mensaje}
+      form(action="", method="POST")
+        label(for="nuevoUsu") Inserta tu nombre de usuario:
+        br
+        input(type="text", name="nuevoUsu", id="nuevoUsu")
+        br
+        label(for="nuevaContra") Inserta tu contraseña
+        br
+        input(type="password", name="nuevaContra", id="nuevaContra")
+        br
+        br
+        input(type="submit", value="Registrate")
+        br
+      a(href="/") Volver al loggin

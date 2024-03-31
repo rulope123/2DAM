@@ -1,0 +1,30 @@
+extends layout.pug
+
+block content
+
+    body.html_pelis
+
+        h1.h1 #{mensaje}
+
+        form(action="/agregar", method="post").css_bonito_editar 
+
+            label(for="") Introduce el título de la película que quieres añadir 
+        
+                input(type="text", name="titulo" id="titulo" required) 
+
+            br
+            br
+
+            label(for="") Introduce el poster de la película 
+        
+                input(type="text", name="poster" id="poster" required) 
+            br
+            br
+
+            label(for="") Introduce la valoración de la película 
+        
+                input(type="number", name="valoracion" id="valoracion" required) 
+            br
+            br
+
+            input(type="submit", name="insertar" id="insertar" value="Añadir la película")
