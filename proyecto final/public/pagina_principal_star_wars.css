@@ -1,0 +1,191 @@
+.div {
+   
+    text-align: justify;
+    padding-top: 20px;
+    background-color: black;
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    width: 80%;
+    margin: auto;
+
+}
+
+.error{
+
+    font-size: 2rem;
+    padding: 1rem;
+    color: #FFF;
+}
+
+a,h1,p,label{color: #80BD01;}
+
+a:hover{ color:rgba(128, 189, 1, .75)}
+
+h1 {margin-top: 20px;}
+
+.table tr:nth-child(even){background-color: #CCC;}
+
+.table tr:nth-child(odd):not(:first-child){background-color: #333232;}
+
+.add{background-color: #0B0;}
+
+.edit{background-color: #0871B2;}
+
+.delete{background-color: #D23641;}
+
+.button{
+
+    padding: .5rem 1rem;
+    color:#FFF;
+    cursor:pointer;
+
+}
+
+.button:hover{
+
+    opacity: .75;
+}
+
+.poster{
+
+    max-width: 100px;
+}
+
+.table{
+
+    width: 100%;
+}
+
+.table td, .table th{
+
+padding: 1rem;
+text-align: center;
+
+}
+
+.html_pelis{
+
+    font-family: sans-serif;
+    font-size: 16px;
+    color:#FFF;
+    background-color: #1D1D1D;
+    text-align: center;
+
+}
+
+.html_loggin{
+
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: #f7ecec;
+}
+
+.css_bonito_loggin {
+
+    background: rgb(67, 233, 175);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_registro {
+
+    background: rgb(67, 125, 233);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_usuario_encontrado {
+
+    background: rgb(67, 222, 233);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_usuario_no_encontrado {
+
+    background: rgb(233, 67, 67);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_comprobar_usuario {
+
+    background: rgb(84, 67, 233);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_cambiar_contrasena {
+
+    background: rgb(35, 156, 120);
+    box-shadow: 2px 3px 20px 5px rgb(197, 189, 189);
+    border-radius: 10px;
+    width: 65%;
+    margin: 300px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.css_bonito_editar {
+
+    background: rgb(86, 151, 132);
+    border-radius: 10px;
+    width: 65%;
+    margin: 200px auto 0 auto;
+    padding: 10px 10px;
+    animation: bounce 1.5s infinite;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
