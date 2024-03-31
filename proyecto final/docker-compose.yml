@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: pelis
+      MYSQL_USER: raul
+      MYSQL_PASSWORD: "rulope"
+    ports:
+      - 3333:3306
+    volumes:
+      - ./models/schema_movie.sql:/docker-entrypoint-initdb.d/schema_movie.sql
+      - mysql-data:/var/lib/mysql
+      - C:/raul/node.js/principiante/codigo/segundo_curso/aplicaciones/pelis/my.cnf:/etc/my.cnf
+    networks:
+      - pelis_pelis-network
+
+  node:
+    image: node:latest
+    working_dir: /app
+    ports:
+      - 3006:3006
+    volumes:
+      - .:/app
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: raul
+      DB_PASSWORD: "rulope"
+      DB_NAME: pelis
+    networks:
+      - pelis_pelis-network
+    command: node server.js
+
+volumes:
+  mysql-data:
+
+networks:
+  pelis_pelis-network:
+    name: pelis_pelis-network
